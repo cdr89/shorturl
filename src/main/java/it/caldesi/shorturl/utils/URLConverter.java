@@ -41,7 +41,6 @@ public class URLConverter {
 		this.keyLength = keyLength;
 
 		if (!domain.trim().isEmpty()) {
-			domain = cleanURL(domain);
 			this.domain = domain;
 		}
 	}
@@ -49,7 +48,6 @@ public class URLConverter {
 	public String createShortURL(String originalURL) {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		originalURL = cleanURL(originalURL);
 		if (valueMap.containsKey(originalURL)) {
 			stringBuilder.append(domain);
 			stringBuilder.append('/');
@@ -98,18 +96,6 @@ public class URLConverter {
 
 	public String getOriginalURL(String shortId) {
 		return keyMap.get(shortId);
-	}
-
-	public static String cleanURL(String url) {
-		if (url == null || url.trim().isEmpty())
-			throw new IllegalArgumentException();
-
-		String lowerCaseURL = url.toLowerCase().trim();
-
-		if (lowerCaseURL.endsWith("/"))
-			lowerCaseURL = lowerCaseURL.substring(0, lowerCaseURL.length() - 1);
-
-		return lowerCaseURL;
 	}
 
 }
